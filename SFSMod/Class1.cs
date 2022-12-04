@@ -23,7 +23,10 @@ namespace SSCMod
     class AddCustomButton
     {
         public static GameObject holder;
-        public static bool snapping;
+        public static bool includeDefaultPlanets;
+        public static bool includeDefaultHeightmaps;
+        public static bool includeDefaultTextures;
+        public static bool hideStarsInAtmosphere;
         public static readonly int MainWindowID = Builder.GetRandomID();
         static bool Prefix(CreateWorldMenu __instance)
         {
@@ -62,9 +65,13 @@ namespace SSCMod
 
                 Container inputContainer = Builder.CreateContainer(window);
 
-                InputWithLabel percentInput = Builder.CreateInputWithLabel(window, 380, 50, labelText: "something", inputText: "1");
                 inputContainer.CreateLayoutGroup(Type.Horizontal, spacing: 10f);;
-                Builder.CreateToggleWithLabel(window, 380, 50, () => !snapping, () => snapping ^= true, 0, 0,"Snap to Parts");
+                //InputWithLabel percentInput = Builder.CreateInputWithLabel(window, 380, 50, labelText: "something", inputText: "1");
+
+                Builder.CreateToggleWithLabel(window, 380, 50, () => !includeDefaultPlanets, () => includeDefaultPlanets ^= true, 0, 0, "Include Default Planets");
+                Builder.CreateToggleWithLabel(window, 400, 50, () => !includeDefaultHeightmaps, () => includeDefaultHeightmaps ^= true, 0, 0, "Include Default Heightmaps");
+                Builder.CreateToggleWithLabel(window, 450, 50, () => !includeDefaultTextures, () => includeDefaultTextures ^= true, 0, 0, "Include Default Textures");
+                Builder.CreateToggleWithLabel(window, 500, 50, () => !hideStarsInAtmosphere, () => hideStarsInAtmosphere ^= true, 0, 0, "Hide Stars In Atmosphere");
 
 
 
