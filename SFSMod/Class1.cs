@@ -66,12 +66,15 @@ namespace SSCMod
                 Container inputContainer = Builder.CreateContainer(window);
 
                 inputContainer.CreateLayoutGroup(Type.Horizontal, spacing: 10f);;
-                //InputWithLabel percentInput = Builder.CreateInputWithLabel(window, 380, 50, labelText: "something", inputText: "1");
 
-                Builder.CreateToggleWithLabel(window, 380, 50, () => !includeDefaultPlanets, () => includeDefaultPlanets ^= true, 0, 0, "Include Default Planets");
-                Builder.CreateToggleWithLabel(window, 400, 50, () => !includeDefaultHeightmaps, () => includeDefaultHeightmaps ^= true, 0, 0, "Include Default Heightmaps");
-                Builder.CreateToggleWithLabel(window, 450, 50, () => !includeDefaultTextures, () => includeDefaultTextures ^= true, 0, 0, "Include Default Textures");
+                Builder.CreateToggleWithLabel(window, 500, 50, () => !includeDefaultPlanets, () => includeDefaultPlanets ^= true, 0, 0, "Include Default Planets");
+                Builder.CreateToggleWithLabel(window, 500, 50, () => !includeDefaultHeightmaps, () => includeDefaultHeightmaps ^= true, 0, 0, "Include Default Heightmaps");
+                Builder.CreateToggleWithLabel(window, 500, 50, () => !includeDefaultTextures, () => includeDefaultTextures ^= true, 0, 0, "Include Default Textures");
                 Builder.CreateToggleWithLabel(window, 500, 50, () => !hideStarsInAtmosphere, () => hideStarsInAtmosphere ^= true, 0, 0, "Hide Stars In Atmosphere");
+                InputWithLabel address = Builder.CreateInputWithLabel(window, 500, 50, labelText: "Main Planet", inputText: "Earth");
+                InputWithLabel angle = Builder.CreateInputWithLabel(window, 750, 50, labelText: "angle | Experimental", inputText: "90");
+                InputWithLabel horizontalPosition = Builder.CreateInputWithLabel(window, 1100, 50, labelText: "LaunchPad Horizontal | Experimental", inputText: "365.0");
+                InputWithLabel height = Builder.CreateInputWithLabel(window, 1050, 50, labelText: "LaunchPad Height | Experimental", inputText: "26.2");
 
 
 
