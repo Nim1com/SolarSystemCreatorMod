@@ -10,7 +10,7 @@ using SFS.Variables;
 using System;
 using SFS.UI;
 
-namespace SFSMod
+namespace SCCMod
 {
     /**
      * You only need to implement the Mod class once in your mod. The Mod class is how 
@@ -27,9 +27,9 @@ namespace SFSMod
     }
     */
 
-    
 
-    public class MyMod : Mod
+
+    public class MyMod : Mod, IUpdatable
     {
         public static MyMod Main;
 
@@ -48,6 +48,9 @@ namespace SFSMod
 
         public override string Description => "A mod to create your own Solar System!";
 
+        /// <summary>Icon</summary>
+        //public override string IconLink => "https://i.imgur.com/r7rCmJT.jpg";
+
         // With this variable you can define if your mods needs the others mods to work
         public override Dictionary<string, string> Dependencies
         {
@@ -59,9 +62,12 @@ namespace SFSMod
         }
 
         // Here you can specify which mods and version you need
-        private Dictionary<string, string> _dependencies = new Dictionary<string, string>() {};
+        private Dictionary<string, string> _dependencies = new Dictionary<string, string>() { };
 
         public static FolderPath modFolder;
+
+        /// <summary>Default constructor</summary>
+
 
         public override void Early_Load()
         {
@@ -85,30 +91,27 @@ namespace SFSMod
             harmony.PatchAll();
 
             // you can subscribe to scene changes
-            SceneHelper.OnWorldSceneLoaded += this.OnWorld;
-            SceneHelper.OnBuildSceneLoaded += this.OnBuild;
+            ConfigurationMenu.Initialize();
         }
 
-        public override void Load()
+        public override async void Load()
         {
             Debug.Log("Running Load code");
 
-            // init your keybindings
-            Settings.Setup();
+            await ModsUpdater.UpdateAll();
+
 
         }
+
+        Harmony patcher;
+        void PatchAll() => (patcher ??= new Harmony("SSC")).PatchAll();
 
         // When the world scene is loaded
-        private void OnWorld()
-        {
-            Debug.Log("On World");
-        }
+
+        public Dictionary<string, FilePath> UpdatableFiles => new() { { "https://github.com/Nim1com/SolarSystemCreatorMod/releases/latest/download/SolarSystemCreator.dll", new FolderPath(ModFolder).ExtendToFile("UITools.dll") } };
+
 
         // When the Build scene is loaded
-        private void OnBuild()
-        {
-            Debug.Log("On Build");
-        }
 
 
 

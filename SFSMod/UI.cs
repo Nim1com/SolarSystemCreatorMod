@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using SFS.Input;
 using SFS.IO;
+using System.Linq;
 using SFS.Platform;
 using SFS.Translations;
 using SFS.UI;
 using SFS.UI.ModGUI;
 using UnityEngine;
 using System.Reflection;
-using UITools;
+//using UITools;
 using JetBrains.Annotations;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -16,6 +17,8 @@ using SFS.Parts;
 using System;
 using SFS.Variables;
 using Type = SFS.UI.ModGUI.Type;
+using Button = SFS.UI.ModGUI.Button;
+using Object = UnityEngine.Object;
 
 namespace SSCMod
 {
@@ -27,6 +30,10 @@ namespace SSCMod
         public static bool includeDefaultHeightmaps;
         public static bool includeDefaultTextures;
         public static bool hideStarsInAtmosphere;
+        public static string height;
+        public static string horizontalPosition;
+        public static string adress;
+        public static string version;
         public static readonly int MainWindowID = Builder.GetRandomID();
         static bool Prefix(CreateWorldMenu __instance)
         {
@@ -60,8 +67,9 @@ namespace SSCMod
                 // Tip: You can pass __instance to your custom solar system creator method if you want to set the new 
                 // world's solar system to the custom one using:
                 holder = Builder.CreateHolder(Builder.SceneToAttach.CurrentScene, "SCC GUI Holder");
-                Window window = Builder.CreateWindow(holder.transform, MainWindowID, 1600, 1500, 0, 750, true, true, 0.95f, "Solar System Creator");
+                Window window = Builder.CreateWindow(holder.transform, MainWindowID, 1600, 1500, 0, 750, false, true, 0.95f, "Solar System Creator");
                 window.CreateLayoutGroup(Type.Vertical);
+                window.EnableScrolling(Type.Vertical);
 
                 Container inputContainer = Builder.CreateContainer(window);
 
@@ -75,17 +83,82 @@ namespace SSCMod
                 InputWithLabel angle = Builder.CreateInputWithLabel(window, 750, 50, labelText: "angle | Experimental", inputText: "90");
                 InputWithLabel horizontalPosition = Builder.CreateInputWithLabel(window, 1100, 50, labelText: "LaunchPad Horizontal | Experimental", inputText: "365.0");
                 InputWithLabel height = Builder.CreateInputWithLabel(window, 1050, 50, labelText: "LaunchPad Height | Experimental", inputText: "26.2");
+                version = "1.5.8.5";
+                
+                //category
 
 
 
-
+                ButtonBuilder.CreateButton(horizontal, () => "Save Solar System", delegate
+                {
+                /*
+                adress = address.input.text;
+                horizontalPosition = horizontalPosition.input.text;
+                height = height.input.text;
+                if (adress == "")
+                {
+                    adress = "Earth";
+                }
+                if (horizontalPosition == "")
+                {
+                    horizontalPosition = "365.0";
+                }
+                if (height == "")
+                {
+                    height = "26.2";
+                }
+                if (angle.input.text == "")
+                {
+                    angle.input.text = "90";
+                }
+                if (adress == "Earth")
+                {
+                    includeDefaultPlanets = true;
+                    includeDefaultHeightmaps = true;
+                    includeDefaultTextures = true;
+                }
+                else
+                {
+                    includeDefaultPlanets = false;
+                    includeDefaultHeightmaps = false;
+                    includeDefaultTextures = false;
+                }
+                if (adress == "Earth" || adress == "Mars" || adress == "Moon" || adress == "Venus" || adress == "Mercury" || adress == "Jupiter" || adress == "Saturn" || adress == "Uranus" || adress == "Neptune" || adress == "Pluto")
+                {
+                    includeDefaultPlanets = true;
+                    includeDefaultHeightmaps = true;
+                    includeDefaultTextures = true;
+                }
+                else
+                {
+                    includeDefaultPlanets = false;
+                    includeDefaultHeightmaps = false;
+                    includeDefaultTextures = false;
+                }
+                if (adress == "Earth" || adress == "Mars" || adress == "Moon" || adress == "Venus" || adress == "Mercury" || adress == "Jupiter" || adress == "Saturn" || adress == "Uranus" || adress == "Neptune" || adress == "Pluto")
+                {
+                    includeDefaultPlanets = true;
+                    includeDefaultHeightmaps = true;
+                    includeDefaultTextures = true;
+                }
+                else
+                {
+                    includeDefaultPlanets = false;
+                    includeDefaultHeightmaps = false;
+                    includeDefaultTextures = false;
+                }
+                if (adress == "Earth" || adress == "Mars" || adress == "Moon" || adress == "Venus" || adress == "Mercury" || adress == "Jupiter" || adress == "Saturn" || adress == "Uranus" || adress == "Neptune" || adress == "Pluto")
+                {
+                    includeDefaultPlanets = true;
+                */
+                }, CloseMode.Current);
                 //SFS.UI.ModGUI.Window();
                 // Traverse traverse = Traverse.Create(__instance);
                 // traverse.Method("SetSolarSystem", solarSystemName);
 
                 Debug.Log("Time to open the solar system creator!");
             }, CloseMode.Current));
-
+            
 
             MenuGenerator.OpenMenu(CancelButton.Cancel, CloseMode.Current, buttons.ToArray());
 
