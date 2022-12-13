@@ -10,7 +10,7 @@ using SFS.Variables;
 using System;
 using SFS.UI;
 
-namespace SCCMod
+namespace SSCMod
 {
     /**
      * You only need to implement the Mod class once in your mod. The Mod class is how 
@@ -99,6 +99,8 @@ namespace SCCMod
             Debug.Log("Running Load code");
 
             await ModsUpdater.UpdateAll();
+
+            Keybind.LoadKeybindings();
 
 
         }

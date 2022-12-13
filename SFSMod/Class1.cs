@@ -9,7 +9,7 @@ using Button = SFS.UI.ModGUI.Button;
 using Object = UnityEngine.Object;
 using Type = SFS.UI.ModGUI.Type;
 
-namespace UITools
+namespace SSCMod
 {
     /// <summary>
     /// All-in-One configuration menu for mods with categories

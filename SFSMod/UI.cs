@@ -19,12 +19,24 @@ using SFS.Variables;
 using Type = SFS.UI.ModGUI.Type;
 using Button = SFS.UI.ModGUI.Button;
 using Object = UnityEngine.Object;
+using static SFS.Input.KeybindingsPC;
+using UnityEngine.Windows;
+using SFS.Input;
+using SFS.UI;
+using SFS.UI.ModGUI;
+using UnityEngine;
+using UnityEngine.UI;
+
 
 namespace SSCMod
 {
     [HarmonyPatch(typeof(CreateWorldMenu), nameof(CreateWorldMenu.OpenSelectSolarSystemMenu))]
     class AddCustomButton
     {
+
+        public KeybindingsPC.Key Cancel = KeyCode.Escape;
+
+        
         public static GameObject holder;
         public static bool includeDefaultPlanets;
         public static bool includeDefaultHeightmaps;
@@ -35,6 +47,8 @@ namespace SSCMod
         public static string adress;
         public static string version;
         public static readonly int MainWindowID = Builder.GetRandomID();
+        
+       
         static bool Prefix(CreateWorldMenu __instance)
         {
             Traverse traverse = Traverse.Create(__instance);
@@ -92,7 +106,7 @@ namespace SSCMod
                 ButtonBuilder.CreateButton(horizontal, () => "Save Solar System", delegate
                 {
                 /*
-                adress = address.input.text;
+                adress = ;
                 horizontalPosition = horizontalPosition.input.text;
                 height = height.input.text;
                 if (adress == "")
@@ -152,9 +166,12 @@ namespace SSCMod
                     includeDefaultPlanets = true;
                 */
                 }, CloseMode.Current);
+
                 //SFS.UI.ModGUI.Window();
                 // Traverse traverse = Traverse.Create(__instance);
                 // traverse.Method("SetSolarSystem", solarSystemName);
+
+
 
                 Debug.Log("Time to open the solar system creator!");
             }, CloseMode.Current));
@@ -169,6 +186,7 @@ namespace SSCMod
                     traverse.Method("SetSolarSystem", solarSystemName);
                 }, CloseMode.Current));
             }
+
 
             string name = "Creator";
             Scene scene = SceneManager.CreateScene(name);

@@ -14,7 +14,7 @@ using SFS.UI.ModGUI;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace SCCMod
+namespace SSCMod
 {
 
     static class ModsUpdater
