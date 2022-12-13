@@ -5,7 +5,6 @@ using ModLoader.Helpers;
 using UnityEngine;
 using static SFS.Input.KeybindingsPC;
 using UITools;
-using 
 
 namespace SSCMod
 {
@@ -15,11 +14,11 @@ namespace SSCMod
         public Key Close_Window = KeyCode.Escape;
         #endregion
 
-        static SSC_Keybindings main;
+        static Keybind main;
 
         public static void LoadKeybindings()
         {
-            Main = SetupKeybindings<Keybind>(MyMod.Main);
+            main = SetupKeybindings<Keybind>(MyMod.Main);
 
             AddStaticKeybindings();
         }

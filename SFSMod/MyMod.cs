@@ -48,6 +48,8 @@ namespace SSCMod
 
         public override string Description => "A mod to create your own Solar System!";
 
+        public override Action LoadKeybindings => Keybind.LoadKeybindings;
+
         /// <summary>Icon</summary>
         //public override string IconLink => "https://i.imgur.com/r7rCmJT.jpg";
 
@@ -100,7 +102,6 @@ namespace SSCMod
 
             await ModsUpdater.UpdateAll();
 
-            Keybind.LoadKeybindings();
 
 
         }
